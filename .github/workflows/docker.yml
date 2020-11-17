@@ -1,0 +1,58 @@
+---
+name:                "ci"
+
+on:
+  # schedule:
+  #   - cron:        "0 21 * * *"
+  push:
+    branches:
+      - develop
+  pull_request:
+    types:
+      - main
+      - master
+  tags:
+
+jobs:
+  docker:
+    name:            "Docker: Build and Push"
+    runs-on:         ubuntu-latest
+    steps:
+      - name:        "Set: user namespace"
+        run:         echo '::set-output name=value::pandemonium1986'
+        id:          docker_user
+      - name:        "Set: image name"
+        run:         echo '::set-output name=value::alpine312'
+        id:          docker_image
+      - name:        "Set: image tag latest"
+        run:         echo '::set-output name=value::latest'
+        id:          docker_tag
+        if:          github.ref == 'refs/head/master' || github.ref == 'refs/head/main'
+      - name:        "Set: image tag snapshot"
+        run:         echo '::set-output name=value::snapshot'
+        id:          docker_tag
+        if:          github.ref != 'refs/head/master' && github.ref != 'refs/head/main'
+      - name:        Checkout
+        uses:        actions/checkout@v2
+      - name:        Login to GitHub Container Registry
+        uses:        docker/login-action@v1
+        with:
+          registry:  ghcr.io
+          username:  ${{ github.repository_owner }}
+          password:  ${{ secrets.CR_PAT }}
+      - name:        Set up Docker Buildx
+        id:          buildx
+        uses:        docker/setup-buildx-action@v1
+        with:
+          version:   latest
+      - name:        Build and push
+        uses:        docker/build-push-action@v2
+        with:
+          context:   .
+          file:      ./Dockerfile
+          platforms: linux/amd64
+          push:      false
+          tags:      |
+            ghcr.io/${{ steps.docker_user.outputs.value }}/${{ steps.docker_image.outputs.value }}:${{ steps.docker_tag.outputs.value }}
+      - name:        Image digest
+        run:         echo ${{ steps.docker_build.outputs.digest }
