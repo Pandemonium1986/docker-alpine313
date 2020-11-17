@@ -35,7 +35,6 @@ RUN apk add --update-cache --no-cache \
 COPY --from=builder /usr/lib/python3.8/site-packages/ /usr/lib/python3.8/site-packages/
 COPY --from=builder /usr/bin/ansible*  /usr/bin/
 COPY --from=builder /usr/bin/molecule  /usr/bin/molecule
-COPY --from=builder /usr/bin/pytest    /usr/bin/pytest
 COPY --from=builder /usr/bin/yamllint  /usr/bin/yamllint
 
 # Prepare molecule workspace
