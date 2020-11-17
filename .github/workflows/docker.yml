@@ -48,4 +48,4 @@ jobs:
           tags:      |
             ghcr.io/${{ steps.docker_user.outputs.value }}/${{ steps.docker_image.outputs.value }}:${{ steps.docker_tag.outputs.value }}
       - name:        Image digest
-        run:         echo ${{ steps.docker_build.outputs.digest }
+        run:         echo ${{ steps.buildx.outputs.digest }
