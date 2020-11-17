@@ -12,14 +12,14 @@ jobs:
     runs-on:         ubuntu-latest
     steps:
       - name:        "Set: user namespace"
-        run:         echo '::set-output name=value::pandemonium1986'
         id:          docker_user
+        run:         echo '::set-output name=value::pandemonium1986'
       - name:        "Set: image name"
-        run:         echo '::set-output name=value::alpine312'
         id:          docker_image
+        run:         echo '::set-output name=value::alpine312'
       - name:        "Set: image tag latest"
-        run:         echo '::set-output name=value::latest'
         id:          docker_tag
+        run:         echo '::set-output name=value::latest'
         if:          github.ref == 'refs/head/master' || github.ref == 'refs/head/main'
       - name:        "Set: image tag snapshot"
         run:         echo '::set-output name=value::snapshot'
@@ -39,6 +39,7 @@ jobs:
         with:
           version:   latest
       - name:        Build and push
+        id:          docker_build
         uses:        docker/build-push-action@v2
         with:
           context:   .
@@ -48,4 +49,4 @@ jobs:
           tags:      |
             ghcr.io/${{ steps.docker_user.outputs.value }}/${{ steps.docker_image.outputs.value }}:${{ steps.docker_tag.outputs.value }}
       - name:        Image digest
-        run:         echo ${{ steps.buildx.outputs.digest }
+        run:         echo ${{ steps.docker_build.outputs.digest }}
