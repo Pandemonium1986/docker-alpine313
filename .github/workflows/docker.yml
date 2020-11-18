@@ -6,25 +6,16 @@ on:
   #   - cron:        "0 21 * * *"
   push:
 
+env:
+  DOCKER_USER:       "pandemonium1986"
+  DOCKER_IMAGE:      "alpine312"
+  DOCKER_TAG:        "latest"
+
 jobs:
   docker:
     name:            "Docker: Build and Push"
     runs-on:         ubuntu-latest
     steps:
-      - name:        "Set: user namespace"
-        id:          docker_user
-        run:         echo '::set-output name=value::pandemonium1986'
-      - name:        "Set: image name"
-        id:          docker_image
-        run:         echo '::set-output name=value::alpine312'
-      - name:        "Set: image tag latest"
-        id:          docker_tag
-        run:         echo '::set-output name=value::latest'
-        if:          github.ref == 'refs/head/master' || github.ref == 'refs/head/main'
-      - name:        "Set: image tag snapshot"
-        run:         echo '::set-output name=value::snapshot'
-        id:          docker_tag
-        if:          github.ref != 'refs/head/master' && github.ref != 'refs/head/main'
       - name:        Checkout
         uses:        actions/checkout@v2
       - name:        Login to GitHub Container Registry
@@ -47,6 +38,6 @@ jobs:
           platforms: linux/amd64
           push:      false
           tags:      |
-            ghcr.io/${{ steps.docker_user.outputs.value }}/${{ steps.docker_image.outputs.value }}:${{ steps.docker_tag.outputs.value }}
+            ghcr.io/${{ env.DOCKER_USER }}/${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
       - name:        Image digest
         run:         echo ${{ steps.docker_build.outputs.digest }}
