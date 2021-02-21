@@ -6,3 +6,12 @@ updates:
     directory:  "/"
     schedule:
       interval: "daily"
+      time:     "09:00"
+      timezone: "Europe/Paris"
+    labels:
+      - "actions"
+      - "dependencies"
+    assignees:
+      - "Pandemonium1986"
+    commit-message:
+      prefix: "dpt-actions"
