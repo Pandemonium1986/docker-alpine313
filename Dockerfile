@@ -14,9 +14,9 @@ RUN apk add --update-cache --no-cache \
         python3 \
         python3-dev
 
-RUN pip install --upgrade --no-cache pip
+RUN pip install --upgrade --no-cache-dir pip
 
-RUN pip install --no-cache \
+RUN pip install --no-cache-dir \
         ansible==${VERSION_ANSIBLE} \
         ansible-lint==${VERSION_ANSIBLE_LINT} \
         molecule[docker]==${VERSION_MOLECULE}
