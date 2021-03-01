@@ -23,7 +23,7 @@ RUN pip install --no-cache-dir \
 
 FROM alpine:3.12
 LABEL maintainer="Michael Maffait"
-LABEL org.opencontainers.image.source https://github.com/Pandemonium1986/docker-alpine312
+LABEL org.opencontainers.image.source="https://github.com/Pandemonium1986/docker-alpine312"
 
 
 # Install basic tools
