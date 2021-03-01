@@ -29,7 +29,7 @@ jobs:
       env:
         VALIDATE_ALL_CODEBASE: false
         DEFAULT_BRANCH:        ${{ env.CURRENT_BRANCH }}
-        GITHUB_TOKEN:          ${{ secrets.GITHUB_TOKEN }}
+        LINTER_RULES_PATH:     "."
   docker:
     name:                      "Docker => Build and Push"
     runs-on:                   ubuntu-latest
