@@ -1,6 +1,10 @@
 FROM alpine:3.12 AS builder
 
+ARG VERSION_ANSIBLE="3.0.0"
+ARG VERSION_ANSIBLE_LINT="5.0.2"
 ARG VERSION_MOLECULE="3.0.8"
+
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
 RUN apk add --update-cache --no-cache \
         alpine-sdk \
@@ -10,13 +14,17 @@ RUN apk add --update-cache --no-cache \
         python3 \
         python3-dev
 
-RUN pip install --no-cache \
-        ansible \
-        ansible-lint \
+RUN pip install --upgrade --no-cache-dir pip
+
+RUN pip install --no-cache-dir \
+        ansible==${VERSION_ANSIBLE} \
+        ansible-lint==${VERSION_ANSIBLE_LINT} \
         molecule[docker]==${VERSION_MOLECULE}
 
 FROM alpine:3.12
 LABEL maintainer="Michael Maffait"
+LABEL org.opencontainers.image.source="https://github.com/Pandemonium1986/docker-alpine312"
+
 
 # Install basic tools
 RUN apk add --update-cache --no-cache \
