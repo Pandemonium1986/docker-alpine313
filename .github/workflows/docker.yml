@@ -8,6 +8,8 @@ on:
     branches:
       - main
       - develop
+    tags:
+      - "*"
 env:
   DOCKER_USER:                 "pandemonium1986"
   DOCKER_IMAGE:                "alpine312"
