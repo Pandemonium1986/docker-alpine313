@@ -1,4 +1,4 @@
-# Alpine 312 Base Image
+# Alpine 3.12 Base Image
 
 ![Github workflow status](https://github.com/Pandemonium1986/docker-alpine312/workflows/docker/badge.svg)
 ![](https://img.shields.io/github/release/Pandemonium1986/docker-alpine312)
@@ -13,7 +13,8 @@ Alpine 3.12 docker image. Built to be like my vagrant box to be able to test Ans
 -   `latest`: the latest stable release.
 -   `X.Y.Z`: the exact version associated with the tag X.Y.Z.
 -   `develop`: the version currently being tested.
--   `main`: the latest beta version.
+-   `main`: the latest beta build.
+-   `nightly`: the latest nightly build.
 
 ## How to Build
 
