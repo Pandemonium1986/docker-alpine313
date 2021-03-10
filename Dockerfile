@@ -22,9 +22,9 @@ RUN pip install --no-cache-dir \
         molecule[docker]==${VERSION_MOLECULE}
 
 FROM alpine:3.13
+
 LABEL maintainer="Michael Maffait"
 LABEL org.opencontainers.image.source="https://github.com/Pandemonium1986/docker-alpine313"
-
 
 # Install basic tools
 RUN apk add --update-cache --no-cache \
