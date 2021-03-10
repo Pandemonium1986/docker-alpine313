@@ -12,7 +12,7 @@ on:
       - "*"
 env:
   DOCKER_USER:                 "pandemonium1986"
-  DOCKER_IMAGE:                "alpine312"
+  DOCKER_IMAGE:                "alpine313"
 
 jobs:
   lint:
