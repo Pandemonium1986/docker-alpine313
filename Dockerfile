@@ -24,7 +24,7 @@ RUN pip install --no-cache-dir \
 FROM alpine:3.18
 
 LABEL maintainer="Michael Maffait"
-LABEL org.opencontainers.image.source="https://github.com/Pandemonium1986/docker-alpine313"
+LABEL org.opencontainers.image.source="https://github.com/Pandemonium1986/docker-alpine318"
 
 # Install basic tools
 RUN apk add --update-cache --no-cache \
