@@ -1,8 +1,8 @@
-FROM alpine:3.13 AS builder
+FROM alpine:3.18 AS builder
 
-ARG VERSION_ANSIBLE="3.0.0"
-ARG VERSION_ANSIBLE_LINT="5.0.2"
-ARG VERSION_MOLECULE="3.0.8"
+ARG VERSION_ANSIBLE="6.7.0"
+ARG VERSION_ANSIBLE_LINT="6.20.3"
+ARG VERSION_MOLECULE="3.6.1"
 
 ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
@@ -21,7 +21,7 @@ RUN pip install --no-cache-dir \
         ansible-lint==${VERSION_ANSIBLE_LINT} \
         molecule[docker]==${VERSION_MOLECULE}
 
-FROM alpine:3.13
+FROM alpine:3.18
 
 LABEL maintainer="Michael Maffait"
 LABEL org.opencontainers.image.source="https://github.com/Pandemonium1986/docker-alpine313"
@@ -40,7 +40,7 @@ RUN apk add --update-cache --no-cache \
         zsh
 
 # Copy from builder
-COPY --from=builder /usr/lib/python3.8/site-packages/ /usr/lib/python3.8/site-packages/
+COPY --from=builder /usr/lib/python3.11/site-packages/ /usr/lib/python3.11/site-packages/
 COPY --from=builder /usr/bin/ansible*  /usr/bin/
 COPY --from=builder /usr/bin/molecule  /usr/bin/molecule
 COPY --from=builder /usr/bin/yamllint  /usr/bin/yamllint
