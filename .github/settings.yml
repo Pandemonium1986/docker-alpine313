@@ -1,7 +1,7 @@
 ---
 repository:
-  name: "docker-alpine313"
-  description: "Docker alpine 3.13 base image"
+  name: "docker-alpine318"
+  description: "Docker alpine 3.18 base image"
   # homepage:                            https://example.github.io/
   topics: "alpine, docker, testing"
   private: false

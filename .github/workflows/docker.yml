@@ -14,33 +14,26 @@ on:
 
 env:
   DOCKER_USER: "pandemonium1986"
-  DOCKER_IMAGE: "alpine313"
+  DOCKER_IMAGE: "alpine318"
 
 jobs:
-  lint:
-    name: "GitHub => Super Linter"
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Init => Run checkout@v2"
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: "Prepare => Get the current branch"
-        run: echo CURRENT_BRANCH=${GITHUB_REF/refs\/heads\//} >> $GITHUB_ENV
-      - name: "Prepare => Get the current tag"
-        if: ${{ github.event_name == 'release' }}
-        run: echo CURRENT_BRANCH=${GITHUB_REF/refs\/tags\//} >> $GITHUB_ENV
-      - name: "GitHub => Lint Dockerfile"
-        uses: github/super-linter@v5.0.0
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: ${{ env.CURRENT_BRANCH }}
-          LINTER_RULES_PATH: "."
+  called-linter:
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+    name: "Called: GitHub Super Linter"
+    uses: pandemonium1986/.github/.github/workflows/called-linter.yml@main
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
   docker:
     name: "Docker => Build and Push"
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     needs:
-      - lint
+      - called-linter
     steps:
       - name: "Init => Checkout"
         uses: actions/checkout@v4
