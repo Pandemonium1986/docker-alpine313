@@ -8,6 +8,6 @@
 
 - N/A
 
-# Bugfixes
+## Bugfixes
 
 - N/A
