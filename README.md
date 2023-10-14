@@ -1,6 +1,6 @@
 # Alpine 3.18 Base Image
 
-![Github workflow status](https://github.com/Pandemonium1986/docker-alpine318/workflows/docker/badge.svg)
+[![Github workflow status](https://github.com/Pandemonium1986/docker-alpine318/actions/workflows/docker.yml/badge.svg?branch=main)](https://github.com/Pandemonium1986/docker-alpine318/actions/workflows/docker.yml)
 ![release](https://img.shields.io/github/release/Pandemonium1986/docker-alpine318)
 ![release-date](https://img.shields.io/github/release-date/Pandemonium1986/docker-alpine318)
 ![license](https://img.shields.io/github/license/Pandemonium1986/docker-alpine318)
